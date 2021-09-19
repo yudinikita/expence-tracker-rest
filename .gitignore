@@ -1,6 +1,8 @@
 # WebStorm
 .idea
 
+# ENV
+config/*.env
 *.env
 
 # Logs
