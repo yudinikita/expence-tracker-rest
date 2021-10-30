@@ -1,0 +1,32 @@
+@import "src/modules/styles/vars";
+@import "src/modules/styles/mixins";
+
+.group {
+  display: flex;
+  justify-content: space-evenly;
+
+  @include a
+}
+
+.input {
+  display: none;
+
+  &:checked + .label {
+    color: $black;
+    background-color: $brand-yellow;
+  }
+}
+
+.label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 10px;
+  user-select: none;
+  color: $gray-6;
+  background-color: $gray-1;
+
+  &:hover {
+    color: $black;
+  }
+}

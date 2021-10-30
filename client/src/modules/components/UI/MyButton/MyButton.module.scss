@@ -1,0 +1,22 @@
+@import "src/modules/styles/vars";
+@import "src/modules/styles/mixins";
+
+.button {
+  height: 70px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  padding: 25px 0;
+  border-radius: 10px;
+  background-color: $brand-yellow;
+  @include a;
+  transition: 300ms;
+
+  &:hover {
+    background-color: #FFBF85;
+  }
+
+  &:focus {
+    background-color: $brand-orange;
+  }
+}

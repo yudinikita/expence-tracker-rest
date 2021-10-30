@@ -1,0 +1,68 @@
+@import "src/modules/styles/vars";
+@import "src/modules/styles/mixins";
+
+.group {
+  display: flex;
+  position: relative;
+  height: 80px;
+
+  @include p
+}
+
+.label {
+  position: absolute;
+  top: 25px;
+  left: 20px;
+  line-height: 17px;
+  padding: 0 6px;
+  color: $gray-6;
+  transition: 0.3s;
+  cursor: text;
+  z-index: 2;
+}
+
+.input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 70px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid $gray-6;
+  border-radius: 10px;
+  transition: 0.3s;
+  z-index: 1;
+
+  &::placeholder {
+    color: white;
+    font-size: 0;
+    z-index: -9999;
+  }
+
+  &:focus {
+    color: $black;
+    outline: none;
+
+    + .label {
+      top: -10px;
+      font-size: 14px;
+      background-color: $white;
+      z-index: 3;
+    }
+  }
+
+  &:hover {
+    border-color: $black;
+
+    + .label {
+      color: black;
+    }
+  }
+}
+
+.input:not(:placeholder-shown).input:not(:focus) + .label {
+  top: -10px;
+  font-size: 14px;
+  background-color: white;
+  z-index: 3;
+}
