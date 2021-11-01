@@ -1,0 +1,43 @@
+@import "src/modules/styles/vars";
+@import "src/modules/styles/mixins";
+
+.container {
+  margin: 20px auto 45px;
+  text-align: center;
+}
+
+.title {
+  @include p;
+  color: $gray-7;
+}
+
+.balance {
+  @include h1;
+  margin: 5px 0;
+}
+
+.balancePerDateGroup {
+  display: flex;
+  justify-content: center;
+}
+
+.balancePerDate {
+  @include h2;
+  margin: 0;
+  padding-right: 20px;
+  color: black;
+
+  .plus {
+    color: $other-green;
+  }
+
+  .minus {
+    color: $other-red;
+  }
+}
+
+.balancePercent {
+  @include h2;
+  margin: 0;
+  color: $gray-7;
+}

@@ -5,6 +5,7 @@ import { TransactionItem } from '../TransactionItem/TransactionItem'
 import { Calendar } from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import './CalendarStyle.css'
+import styles from './TransactionList.module.scss'
 
 export const TransactionsList = () => {
   const [calendarValue, setCalendarValue] = useState(new Date().getMonth())
@@ -74,9 +75,10 @@ export const TransactionsList = () => {
         maxDetail='month'
         minDetail='month'
         onActiveStartDateChange={changeHandler}
+        className={styles.calendar}
       />
 
-      {data.getTransactions.map(transaction => transactionListItem(transaction))}
+      {data.getTransactions.slice(0).reverse().map(transaction => transactionListItem(transaction))}
     </div>
   )
 }

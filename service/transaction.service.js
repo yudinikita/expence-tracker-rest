@@ -3,7 +3,7 @@ const TransactionModel = require('../models/Transactions')
 class TransactionService {
 
   async getTransactions (user) {
-    const transactionsFetched = await TransactionModel.find({ user }).sort({ createdAt: -1 }).populate('category')
+    const transactionsFetched = await TransactionModel.find({ user }).sort({ createdAt: 1 }).populate('category')
 
     return await transactionsFetched.map(transaction => {
       return {

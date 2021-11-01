@@ -1,0 +1,30 @@
+@import "src/modules/styles/vars";
+@import "src/modules/styles/mixins";
+
+.mainNavigation {
+  position: fixed;
+  bottom: 0;
+  width: 375px;
+  background-color: white;
+  z-index: 1000;
+}
+
+.container {
+  padding: 25px 50px;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .active {
+    .activeImage {
+      display: block;
+    }
+  }
+}
+
+.activeImage {
+  display: none;
+}

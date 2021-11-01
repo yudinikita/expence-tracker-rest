@@ -3,10 +3,9 @@ import { Balance } from '../components'
 
 export const HomePage = () => {
 
-
   return (
-    <div>
-      <h1>Главная страница</h1>
+    <div className='container'>
+      <h1>Главная 👋</h1>
       <Balance/>
     </div>
   )

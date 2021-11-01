@@ -41,6 +41,28 @@ h6 {
   line-height: 130%;
 }
 
+h1 {
+  @include h1
+}
+
+h2 {
+  @include h2
+}
+
+p {
+  @include p
+}
+
+a {
+  @include a
+}
+
+.container {
+  width: 375px;
+  margin-top: 115px;
+  margin-bottom: 150px;
+}
+
 .visually-hidden:not(:focus):not(:active) {
   position: absolute;
   clip-path: inset(100%);

@@ -1,0 +1,28 @@
+@import "src/modules/styles/vars";
+@import "src/modules/styles/mixins";
+
+.mainHeader {
+  position: fixed;
+  top: 0;
+  width: 375px;
+  background-color: white;
+  z-index: 1000;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+
+.btnAdd {
+  color: black;
+  font-size: 40px;
+  font-weight: 300;
+
+  &:hover {
+    color: $brand-yellow;
+  }
+}
