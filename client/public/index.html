@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -7,12 +7,69 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Сервис позволяет добавлять расходы и доходы по категориям с комментариями к ним. Подойдет для людей, желающих просто вести учет своих трат и понимать, на что они тратят денег больше всего."
     />
-    <title>React App</title>
+    <title>Денежки - простой учет личных финансов</title>
+    <style>
+      .preloaderPage {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: white;
+        z-index: 99998;
+        transition: all 250ms ease-in-out;
+      }
+
+      .preloader {
+        top: 50%;
+        left: 50%;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        z-index: 99999;
+        transition: all 250ms ease-in-out;
+      }
+
+      .preloaderCircular {
+        animation: rotate 1s linear infinite;
+        height: 100%;
+        transform-origin: center center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+
+      .preloaderPath {
+        stroke: #ffcf26;
+        stroke-dasharray: 93.6375, 124.85;
+        stroke-dashoffset: 0;
+        stroke-linecap: round;
+        stroke-width: 3;
+      }
+
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <noscript>Включите JavaScript для работы приложения.</noscript>
+    <div id="root">
+      <div class='preloaderPage'>
+        <div class='preloader'>
+          <svg xmlns="http://www.w3.org/2000/svg" class='preloaderCircular' viewBox="25 25 50 50">
+            <circle class='preloaderPath' cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"/>
+          </svg>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

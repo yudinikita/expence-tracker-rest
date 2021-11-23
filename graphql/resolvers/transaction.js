@@ -18,7 +18,8 @@ module.exports = {
     if (!req.user.isActivated) return res.status(403)
     try {
       const { id } = req.user
-      return await TransactionService.getTransactionDetail(id, args.transaction)
+      const { transactionId } = args
+      return await TransactionService.getTransactionDetail(id, transactionId)
     } catch (error) {
       throw error
     }

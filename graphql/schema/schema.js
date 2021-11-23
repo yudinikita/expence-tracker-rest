@@ -35,7 +35,9 @@ const mainSchema = `
     
     createCategory(category: CategoryInput): Category!
     updateCategory(id: ID, category: CategoryInput): Category!
-    deleteCategory(id: ID): Boolean!
+    deleteCategory(id: ID): Boolean
+    deleteCategoryReplace(id: ID, newId: ID): Boolean
+    deleteCategoryWithTransactions(id: ID): Boolean
   }
 
   schema {

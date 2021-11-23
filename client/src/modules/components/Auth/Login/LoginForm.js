@@ -10,6 +10,8 @@ export const LoginForm = () => {
   const [myError, setMyError] = useState('')
 
   const [formData, setFormData] = useState({ email: '', password: '' })
+
+  // eslint-disable-next-line
   const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER, {
     variables: {
       userInput: {
@@ -38,6 +40,7 @@ export const LoginForm = () => {
         },
         refreshToken: userData.refreshToken,
         refreshTokenExpireIn: 30 * 24 * 60 * 60 * 1000
+        // eslint-disable-next-line no-empty
       })) {
       } else {
         setMyError('Ошибка авторизации')
@@ -52,14 +55,14 @@ export const LoginForm = () => {
       <form onSubmit={submitHandler}>
         <div>
           <input
-            type={'text'}
+            type='text'
             placeholder='Email'
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           />
         </div>
         <div>
           <input
-            type={'password'}
+            type='password'
             placeholder='Пароль'
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           />
@@ -68,9 +71,9 @@ export const LoginForm = () => {
         <button type='submit'>Войти</button>
       </form>
       {myError && <p>{myError}</p>}
-      <br/>
+      <br />
       <p>У вас еще нет аккаунта?</p>
-      <Link to="/registration">Зарегистрироваться</Link>
+      <Link to='/registration'>Зарегистрироваться</Link>
     </div>
   )
 }

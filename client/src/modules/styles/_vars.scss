@@ -1,20 +1,22 @@
-$black: #000000;
-$white: #ffffff;
+:root {
+  --color-black: #000000;
+  --color-white: #ffffff;
 
-$gray-1: #F0F0F0;
-$gray-2: #E5E5E5;
-$gray-3: #CCCCCC;
-$gray-4: #B2B2B2;
-$gray-5: #999999;
-$gray-6: #7F7F7F;
-$gray-7: #666666;
-$gray-8: #4C4C4C;
-$gray-9: #333333;
-$gray-10: #191919;
+  --color-gray-1: #f0f0f0;
+  --color-gray-2: #e5e5e5;
+  --color-gray-3: #cccccc;
+  --color-gray-4: #b2b2b2;
+  --color-gray-5: #999999;
+  --color-gray-6: #7f7f7f;
+  --color-gray-7: #666666;
+  --color-gray-8: #4c4c4c;
+  --color-gray-9: #333333;
+  --color-gray-10: #191919;
 
-$brand-orange: #FF7223;
-$brand-yellow: #FFCF26;
+  --color-brand-yellow: #ffcf26;
+  --color-brand-orange: #ff7223;
 
-$other-blue: #3685B3;
-$other-green: #009E0D;
-$other-red: #FF3D00;
+  --color-other-blue: #3685b3;
+  --color-other-green: #009e0d;
+  --color-other-red: #ff3d00;
+}

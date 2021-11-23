@@ -1,0 +1,23 @@
+@mixin navImg($class, $stroke, $fill) {
+  :global(.#{$class}) {
+    background-image: $stroke;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: background-image 300ms ease-in-out;
+
+    &-active {
+      background-image: $fill;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+
+    &:hover {
+      background-image: $fill;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+  }
+}

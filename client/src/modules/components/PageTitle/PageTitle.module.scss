@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-left: 7px;
+  width: 30px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}

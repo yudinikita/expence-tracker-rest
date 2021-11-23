@@ -1,24 +1,23 @@
-@import "src/modules/styles/vars";
 @import "src/modules/styles/mixins";
 
 .group {
+  @include p;
+
   display: flex;
   position: relative;
   height: 80px;
-
-  @include p
 }
 
 .label {
   position: absolute;
   top: -10px;
   font-size: 14px;
-  background-color: $white;
+  background-color: var(--color-white);
   left: 20px;
   line-height: 17px;
   padding: 0 6px;
-  color: $gray-6;
-  transition: 0.3s;
+  color: var(--color-gray-6);
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
   z-index: 3;
 }
@@ -32,6 +31,7 @@
   border-radius: 10px;
   padding: 20px;
   outline: none;
+  cursor: pointer;
 
   option {
     padding: 20px;

@@ -1,6 +1,9 @@
-@import "./vendor/normalize";
+@import './vendor/normalize';
+@import './vendor/calendar';
+@import './vendor/modal';
 
-@import "mixins";
-@import "fonts";
-@import "settings";
-@import "vars";
+@import 'mixins';
+@import 'fonts';
+@import 'vars';
+@import 'animations';
+@import 'settings';

@@ -1,19 +1,22 @@
-@import "src/modules/styles/vars";
-@import "src/modules/styles/mixins";
+@import 'src/modules/styles/mixins';
 
 .container {
+  display: flex;
+  flex-direction: column;
   margin: 20px auto 45px;
   text-align: center;
 }
 
 .title {
   @include p;
-  color: $gray-7;
+  color: var(--color-gray-7);
 }
 
 .balance {
-  @include h1;
-  margin: 5px 0;
+  margin: 5px 0 !important;
+  font-weight: 700 !important;
+  font-size: 30px !important;
+  line-height: 140% !important;
 }
 
 .balancePerDateGroup {
@@ -21,23 +24,29 @@
   justify-content: center;
 }
 
-.balancePerDate {
+.balancePerDateContainer {
   @include h2;
   margin: 0;
   padding-right: 20px;
   color: black;
 
   .plus {
-    color: $other-green;
+    color: var(--color-other-green);
   }
 
   .minus {
-    color: $other-red;
+    color: var(--color-other-red);
   }
+}
+
+.balancePerDate {
+  font-weight: 500 !important;
+  font-size: 24px !important;
+  line-height: 150% !important;
 }
 
 .balancePercent {
   @include h2;
   margin: 0;
-  color: $gray-7;
+  color: var(--color-gray-7);
 }

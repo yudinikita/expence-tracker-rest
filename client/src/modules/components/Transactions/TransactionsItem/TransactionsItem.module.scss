@@ -1,0 +1,48 @@
+.link {
+  padding: 10px 0;
+  border-radius: 10px;
+  display: block;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: var(--color-gray-1);
+  }
+
+  &:active {
+    background-color: var(--color-brand-yellow);
+    transform: scale(0.98);
+  }
+}
+
+.containerTitleAmount {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  max-width: 200px;
+  font-size: 18px;
+  line-height: 160%;
+  font-weight: 500;
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.amount {
+  max-width: 100px;
+  text-align: right;
+  overflow: hidden;
+}
+
+.commentary {
+  margin: 10px 0 0;
+  font-size: 16px;
+  line-height: 130%;
+  font-weight: 400;
+  color: var(--color-gray-5);
+  overflow-wrap: break-word;
+}

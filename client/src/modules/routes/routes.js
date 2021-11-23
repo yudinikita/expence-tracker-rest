@@ -1,59 +1,62 @@
 import React from 'react'
-import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom'
-import { MainNavigation, MainHeader } from '../components'
-import {
-  HomePage,
-  LoginPage,
-  RegistrationPage,
-  ActivatePage,
-  TransactionPage,
-  CreateTransactionPage,
-  AnalyticsPage,
-  SettingsPage
-} from '../pages'
-import { PrivateRoute, useIsAuthenticated } from 'react-auth-kit'
-import { useAuthUser } from 'react-auth-kit'
+import { Switch, Route, HashRouter as Router, Redirect } from 'react-router-dom'
+import { PrivateRoute, useIsAuthenticated, useAuthUser } from 'react-auth-kit'
+import { LoginPage, RegistrationPage, ActivatePage, Page404 } from '../pages'
+import { privateRoutes } from './privateRoutes'
+import { SettingsProvider } from '../context/Settings'
+import { LayoutMain } from '../layouts'
 
 export const RouteComponent = () => {
   const isAuthenticated = useIsAuthenticated()
   const auth = useAuthUser()
+  const loginPath = '/login'
 
   if (auth()?.isActivated === false) {
     return (
       <Router>
         <Switch>
-          <Route path='/activate' component={ActivatePage} exact/>
+          <Route path='/activate' component={ActivatePage} exact />
+
+          <Route path='/404' component={Page404} exact />
+          <Route><Redirect to='/404' /></Route>
         </Switch>
-        <Redirect to='/activate'/>
+        <Redirect to='/activate' />
       </Router>
     )
   }
 
   return (
-    <Router>
-      <MainHeader/>
-      <Switch>
-        <Route path='/login' component={LoginPage} exact>
-          {isAuthenticated() && <Redirect to='/'/>}
-        </Route>
-        <Route path='/registration' component={RegistrationPage} exact>
-          {isAuthenticated() && <Redirect to='/'/>}
-        </Route>
-        <Route path='/activate' component={ActivatePage} exact>
-          {!auth()?.isActivated && <Redirect to='/'/>}
-        </Route>
-        <Route path='/activate/:id' component={ActivatePage} exact>
-          {auth()?.isActivated && <Redirect to='/login'/>}
-        </Route>
-        <PrivateRoute path='/' component={HomePage} loginPath={'/login'} exact/>
-        <PrivateRoute path={'/transactions'} component={TransactionPage} loginPath={'/login'} exact/>
-        <PrivateRoute path={'/transactions/create'} component={CreateTransactionPage} loginPath={'/login'} exact/>
-        <PrivateRoute path={'/analytics'} component={AnalyticsPage} loginPath={'/login'} exact/>
-        <PrivateRoute path={'/settings'} component={SettingsPage} loginPath={'/login'} exact/>
-      </Switch>
-      <MainNavigation/>
-    </Router>
+    <SettingsProvider>
+      <Router>
+        <LayoutMain>
+          <Switch>
+            <Route path='/login' component={LoginPage} exact>
+              {isAuthenticated() && <Redirect to='/' />}
+            </Route>
+            <Route path='/registration' component={RegistrationPage} exact>
+              {isAuthenticated() && <Redirect to='/' />}
+            </Route>
+            <Route path='/activate' component={ActivatePage} exact>
+              {!auth()?.isActivated && <Redirect to='/' />}
+            </Route>
+            <Route path='/activate/:id' component={ActivatePage} exact>
+              {auth()?.isActivated && <Redirect to='/login' />}
+            </Route>
+
+            {privateRoutes.map(route =>
+              <PrivateRoute
+                path={route.path}
+                component={route.component}
+                loginPath={loginPath}
+                exact={route.exact}
+                key={route.id}
+              />)}
+
+            <Route path='/404' component={Page404} exact />
+            <Route><Redirect to='/404' /></Route>
+          </Switch>
+        </LayoutMain>
+      </Router>
+    </SettingsProvider>
   )
 }
-
-// <Route path='/transactions' component={TransactionPage} exact/>

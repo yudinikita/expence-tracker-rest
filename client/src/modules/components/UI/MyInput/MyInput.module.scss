@@ -1,22 +1,22 @@
-@import "src/modules/styles/vars";
 @import "src/modules/styles/mixins";
 
 .group {
+  @include p;
+
+  height: 80px;
   display: flex;
   position: relative;
-  height: 80px;
-
-  @include p
 }
 
 .label {
+  display: none;
   position: absolute;
   top: 25px;
   left: 20px;
   line-height: 17px;
   padding: 0 6px;
-  color: $gray-6;
-  transition: 0.3s;
+  color: var(--color-gray-6);
+  transition: all 0.3s;
   cursor: text;
   z-index: 2;
 }
@@ -28,31 +28,32 @@
   height: 70px;
   width: 100%;
   padding: 20px;
-  border: 1px solid $gray-6;
+  border: 1px solid var(--color-gray-6);
   border-radius: 10px;
-  transition: 0.3s;
+  transition: all 0.3s ease-in-out;
   z-index: 1;
 
-  &::placeholder {
-    color: white;
-    font-size: 0;
-    z-index: -9999;
-  }
-
   &:focus {
-    color: $black;
+    color: var(--color-black);
     outline: none;
+
+    &::placeholder {
+      color: white;
+      font-size: 0;
+      z-index: -9999;
+    }
 
     + .label {
       top: -10px;
       font-size: 14px;
-      background-color: $white;
+      background-color: var(--color-white);
       z-index: 3;
+      display: block;
     }
   }
 
   &:hover {
-    border-color: $black;
+    border-color: var(--color-black);
 
     + .label {
       color: black;
@@ -65,4 +66,5 @@
   font-size: 14px;
   background-color: white;
   z-index: 3;
+  display: block;
 }

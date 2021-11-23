@@ -10,15 +10,14 @@ const cookieParser = require('cookie-parser')
 const serveStatic = require('serve-static')
 const errorMiddleware = require('./middleware/error.middleware')
 const { getUserData } = require('./utils/utils')
+const { graphqlHTTP } = require('express-graphql')
+const graphqlSchema = require('./graphql/schema/schema')
+const graphqlResolvers = require('./graphql/resolvers/resolvers')
 
 const dotenvParse = dotenv.config({ path: './config/config.env' })
 if (dotenvParse.error) {
   throw dotenvParse.error
 }
-
-const { graphqlHTTP } = require('express-graphql')
-const graphqlSchema = require('./graphql/schema/schema')
-const graphqlResolvers = require('./graphql/resolvers/resolvers')
 
 const PORT = process.env.PORT || 5000
 
@@ -34,7 +33,11 @@ app.use(cors({
 app.use(morgan('dev'))
 
 app.use((req, res, next) => {
-  req.user = req && req.headers.authorization ? getUserData(req) : null
+  if (req && req.headers.authorization) {
+    req.user = getUserData(req)
+  } else {
+    req.user = null
+  }
   next()
 })
 
@@ -71,8 +74,8 @@ const start = async () => {
   try {
     await connectDB()
     app.listen(PORT, () => {
-      console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}...`.magenta)
-      console.log(`Server ready at http://localhost:${PORT}`.yellow)
+      console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}...`.magenta.bold)
+      console.log(`Server ready at http://localhost:${PORT}`.yellow.bold)
     })
   } catch (e) {
     console.log(e)

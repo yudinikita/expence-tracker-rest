@@ -15,8 +15,15 @@ class TransactionService {
     })
   }
 
-  async getTransactionDetail (user, transaction) {
-    return TransactionModel.findOne({ user, transaction }).populate('category')
+  async getTransactionDetail (user, _id) {
+    const transactionFetched = await TransactionModel.findOne({ user, _id }).populate('category')
+
+    return {
+      ...transactionFetched._doc,
+      _id: transactionFetched.id,
+      createdAt: new Date(transactionFetched._doc.createdAt).toISOString(),
+      updatedAt: new Date(transactionFetched._doc.updatedAt).toISOString(),
+    }
   }
 
   async createTransaction (user, transaction) {
@@ -32,12 +39,24 @@ class TransactionService {
     return result.deletedCount === 1
   }
 
+  async deleteManyTransaction (category) {
+    const result = await TransactionModel.deleteMany({ category })
+    return result.deletedCount === 1
+  }
+
   async updateTransaction (_id, transaction) {
     return TransactionModel.findOneAndUpdate(
       { _id },
       { $set: { ...transaction } },
       { returnOriginal: false }
     ).populate('category')
+  }
+
+  async updateTransactionsByCategory (oldCategory, newCategory) {
+    return TransactionModel.updateMany(
+      { category: oldCategory },
+      { $set: { category: newCategory } }
+    )
   }
 
 }

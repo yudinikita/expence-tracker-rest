@@ -1,10 +1,9 @@
-@import "src/modules/styles/vars";
-@import "src/modules/styles/mixins";
-
 .mainHeader {
   position: fixed;
   top: 0;
-  width: 375px;
+  left: 0;
+  right: 0;
+  width: 100%;
   background-color: white;
   z-index: 1000;
 }
@@ -12,17 +11,60 @@
 .container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-top: 50px;
   margin-bottom: 25px;
+  padding: 0;
+  align-items: center;
+  list-style: none;
+
+  a {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.logo {
+  transition: filter 300ms ease-in-out;
+
+  &:hover {
+    svg {
+      rect {
+        animation: color-change-4x 4s linear infinite alternate both;
+      }
+    }
+  }
+
+  &:active {
+    transform: scale(.92);
+  }
 }
 
 .btnAdd {
-  color: black;
-  font-size: 40px;
-  font-weight: 300;
+  padding: 8px;
+  border-radius: 10px;
+  transition: background-color 0.25s ease-in-out;
 
   &:hover {
-    color: $brand-yellow;
+    background-color: var(--color-gray-2);
+  }
+
+  &:active {
+    transform: scale(0.90);
+    background-color: var(--color-brand-yellow);
+  }
+}
+
+@keyframes color-change-4x {
+  0% {
+    fill: #ffcf26;
+  }
+  33.3333% {
+    fill: #ff7223;
+  }
+  66.666% {
+    fill: #009e0d;
+  }
+  100% {
+    fill: #3685b3;
   }
 }

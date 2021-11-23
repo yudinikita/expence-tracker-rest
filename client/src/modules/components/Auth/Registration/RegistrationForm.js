@@ -5,18 +5,19 @@ import { useMutation } from '@apollo/client'
 import { REGISTRATION_USER } from '../../../graphql/mutations/auth.mutation'
 
 export const RegistrationForm = () => {
-
   const signIn = useSignIn()
 
   const [myError, setMyError] = useState('')
 
   const [formData, setFormData] = useState({ email: '', password: '', repeatPassword: '' })
+
+  // eslint-disable-next-line
   const [registrationUser, { data, loading, error }] = useMutation(REGISTRATION_USER, {
     variables: {
       userInput: {
         email: formData.email,
         password: formData.password,
-        repeatPassword: formData.repeatPassword,
+        repeatPassword: formData.repeatPassword
       }
     },
     errorPolicy: 'all'
@@ -40,6 +41,7 @@ export const RegistrationForm = () => {
         },
         refreshToken: userData.refreshToken,
         refreshTokenExpireIn: 30 * 24 * 60 * 60 * 1000
+        // eslint-disable-next-line no-empty
       })) {
       } else {
         setMyError('Ошибка при регистрации')
@@ -54,21 +56,21 @@ export const RegistrationForm = () => {
       <form onSubmit={submitHandler}>
         <div>
           <input
-            type={'text'}
+            type='text'
             placeholder='Email'
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           />
         </div>
         <div>
           <input
-            type={'password'}
+            type='password'
             placeholder='Пароль'
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           />
         </div>
         <div>
           <input
-            type={'password'}
+            type='password'
             placeholder='Повторите пароль'
             onChange={(e) => setFormData({ ...formData, repeatPassword: e.target.value })}
           />
@@ -77,9 +79,9 @@ export const RegistrationForm = () => {
         <button type='submit'>Зарегистрироваться</button>
       </form>
       {myError && <p>{myError}</p>}
-      <br/>
+      <br />
       <p>У вас уже есть аккаунт?</p>
-      <Link to="/">Войти</Link>
+      <Link to='/'>Войти</Link>
     </div>
   )
 }

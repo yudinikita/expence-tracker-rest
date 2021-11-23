@@ -1,13 +1,6 @@
 import React from 'react'
 import { App } from './App'
-import {
-  HttpLink,
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  ApolloLink,
-  from
-} from '@apollo/client'
+import { ApolloClient, ApolloLink, ApolloProvider, from, HttpLink, InMemoryCache } from '@apollo/client'
 import { onError } from '@apollo/client/link/error'
 
 const httpLink = new HttpLink({
@@ -36,21 +29,28 @@ const signOut = () => {
   window.location.reload()
 }
 
-const redirectActivatedPage = () => {
-  window.location.replace('/activate')
-}
+// const redirectActivatedPage = () => {
+//   window.location.replace('/activate')
+// }
 
 const networkErrorsLink = onError(({ networkError }) => {
   if (networkError.statusCode === 401) {
     console.log('error 401')
     signOut()
   }
+
   if (networkError.statusCode === 403) {
     console.log('error 403')
-    //redirectActivatedPage()
+    // redirectActivatedPage()
   }
-  if (networkError.statusCode === 404) console.log('error 404')
-  if (networkError.statusCode === 500) console.log('error 500')
+
+  if (networkError.statusCode === 404) {
+    console.log('error 404')
+  }
+
+  if (networkError.statusCode === 500) {
+    console.log('error 500')
+  }
 })
 
 const client = new ApolloClient({
@@ -59,8 +59,12 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 })
 
-export default () => (
-  <ApolloProvider client={client}>
-    <App/>
-  </ApolloProvider>
+const MyApolloProvider = () => (
+  <React.StrictMode>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </React.StrictMode>
 )
+
+export default MyApolloProvider

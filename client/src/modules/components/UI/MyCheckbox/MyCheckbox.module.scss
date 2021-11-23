@@ -1,19 +1,18 @@
-@import "src/modules/styles/vars";
 @import "src/modules/styles/mixins";
 
 .group {
+  @include a;
+
   display: flex;
   justify-content: space-evenly;
-
-  @include a
 }
 
 .input {
   display: none;
 
   &:checked + .label {
-    color: $black;
-    background-color: $brand-yellow;
+    color: var(--color-black);
+    background-color: var(--color-brand-yellow);
   }
 }
 
@@ -23,10 +22,15 @@
   padding: 10px 15px;
   border-radius: 10px;
   user-select: none;
-  color: $gray-6;
-  background-color: $gray-1;
+  color: var(--color-gray-6);
+  background-color: var(--color-gray-1);
+  transition: color 250ms ease-in-out;
 
   &:hover {
-    color: $black;
+    color: var(--color-black);
+  }
+
+  &:active {
+    transform: scale(0.96);
   }
 }

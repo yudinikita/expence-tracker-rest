@@ -1,7 +1,6 @@
 html {
-  overflow-x: hidden;
   box-sizing: border-box;
-  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 *,
@@ -11,17 +10,17 @@ html {
 }
 
 body {
-  margin: 0;
   min-width: 320px;
-  font-family: "Inter", sans-serif;
+  margin: 0;
   font-size: 16px;
+  font-family: 'Inter', sans-serif;
   line-height: 160%;
-  background-color: var(--color-white);
+  background-color: white;
 }
 
 img {
-  height: auto;
   max-width: 100%;
+  height: auto;
 }
 
 a {
@@ -36,8 +35,8 @@ h5,
 h6 {
   margin: 0;
   padding: 0;
-  font-family: "Inter", sans-serif;
   font-weight: 600;
+  font-family: 'Inter', sans-serif;
   line-height: 130%;
 }
 
@@ -58,33 +57,81 @@ a {
 }
 
 .container {
-  width: 375px;
-  margin-top: 115px;
-  margin-bottom: 150px;
+  width: 315px;
+  margin: 120px auto 150px;
 }
 
 .visually-hidden:not(:focus):not(:active) {
   position: absolute;
-  clip-path: inset(100%);
-  overflow: hidden;
-  margin: -1px;
-  border: 0;
-  padding: 0;
   width: 1px;
   height: 1px;
+  margin: -1px;
+  padding: 0;
   white-space: nowrap;
   clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+  border: 0;
+  overflow: hidden;
 }
 
 .btn-reset {
-  border: none;
   padding: 0;
   background: transparent;
   cursor: pointer;
+  border: none;
 }
 
 .list-reset {
-  list-style: none;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
+
+.linkSecond {
+  display: block;
+  margin-top: 15px;
+  color: var(--color-gray-6);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 160%;
+  transition: all 300ms;
+
+  &:hover {
+    color: var(--color-brand-yellow);
+  }
+
+  &:active {
+    color: var(--color-brand-orange);
+  }
+}
+
+::selection {
+  color: black;
+  background-color: #ffcf26;
+}
+
+.contentContainer {
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+@media screen and (max-width: 370px) {
+  .contentContainer {
+    padding: 0 15px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .contentContainer {
+    padding: 5px;
+  }
+}
+
+@media screen and (max-width: 329px) {
+  .contentContainer {
+    padding: 0;
+  }
+}
+
+

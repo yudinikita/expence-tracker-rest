@@ -1,5 +1,4 @@
 const CategoryService = require('../../service/category.service')
-const { isAuth } = require('../../utils/utils')
 
 module.exports = {
 
@@ -30,6 +29,26 @@ module.exports = {
     if (!req.user.isActivated) return res.status(403)
     try {
       return await CategoryService.deleteCategory(args.id)
+    } catch (error) {
+      throw error
+    }
+  },
+
+  deleteCategoryReplace: async (args, { req, res }) => {
+    if (!req.user) return res.status(401)
+    if (!req.user.isActivated) return res.status(403)
+    try {
+      return await CategoryService.deleteCategoryReplace(args.id, args.newId)
+    } catch (error) {
+      throw error
+    }
+  },
+
+  deleteCategoryWithTransactions: async (args, { req, res }) => {
+    if (!req.user) return res.status(401)
+    if (!req.user.isActivated) return res.status(403)
+    try {
+      return await CategoryService.deleteCategoryWithTransactions(args.id)
     } catch (error) {
       throw error
     }

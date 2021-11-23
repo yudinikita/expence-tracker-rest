@@ -3,7 +3,7 @@ module.exports = `
     _id: ID!
     user: ID!
     amount: Int!
-    category: Category!
+    category: Category
     commentary: String
     createdAt: String
     updatedAt: String
@@ -11,7 +11,7 @@ module.exports = `
 
   input TransactionInput {
     amount: Int!
-    category: ID!
+    category: ID
     commentary: String
     createdAt: String
     updatedAt: String
