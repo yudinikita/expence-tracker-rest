@@ -1,12 +1,14 @@
 html {
   box-sizing: border-box;
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: inherit;
+  outline-color: var(--color-brand-yellow);
 }
 
 body {

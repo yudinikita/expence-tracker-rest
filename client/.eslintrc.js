@@ -17,7 +17,7 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: ['react', 'import', 'react-hooks'],
-  ignorePatterns: ['node_modules/', 'src/modules/components/UI/'],
+  ignorePatterns: ['node_modules/'],
   rules: {},
   settings: {
     react: {
