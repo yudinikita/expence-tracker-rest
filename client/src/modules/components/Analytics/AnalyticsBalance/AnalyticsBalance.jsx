@@ -1,19 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useAnalyticsBalance } from './hooks/useAnalyticsBalance'
-import { MyLoaderList, AnalyticsBalanceList } from './components'
+import { AnalyticsBalanceList, AnalyticsLoaderList } from '..'
 import { MyError } from '../..'
 
-export const AnalyticsBalance = ({ startDate = new Date(), endDate = new Date() }) => {
-  const { AnalyticsItems, loading, error } = useAnalyticsBalance(startDate, endDate)
+const propTypes = {
+  date: PropTypes.exact({
+    activeDate: PropTypes.instanceOf(Date),
+    startDate: PropTypes.instanceOf(Date),
+    endDate: PropTypes.instanceOf(Date)
+  }),
+}
 
-  if (loading) return <MyLoaderList />
+export const AnalyticsBalance = ({ date }) => {
+  const { analyticsItems, loading, error } = useAnalyticsBalance(date?.startDate, date?.endDate)
+
+  if (loading) return <AnalyticsLoaderList />
   if (error) return <MyError error={error} />
 
-  return <AnalyticsBalanceList AnalyticsItems={AnalyticsItems} />
+  return <AnalyticsBalanceList analyticsItems={analyticsItems} />
 }
 
-AnalyticsBalance.propTypes = {
-  startDate: PropTypes.instanceOf(Date),
-  endDate: PropTypes.instanceOf(Date)
-}
+AnalyticsBalance.propTypes = propTypes

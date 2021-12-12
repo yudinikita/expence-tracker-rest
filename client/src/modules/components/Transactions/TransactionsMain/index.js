@@ -1,1 +1,0 @@
-export { TransactionsMain } from './TransactionsMain'

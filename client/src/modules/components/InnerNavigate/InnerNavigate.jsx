@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useHistory } from 'react-router-dom'
-import styles from './InnerNavigate.module.scss'
+import { useNavigate } from 'react-router-dom'
 import SVG from 'react-inlinesvg'
+import styles from './InnerNavigate.module.scss'
 
 export const InnerNavigate = ({
   title,
@@ -10,11 +10,11 @@ export const InnerNavigate = ({
   haveBtn = true,
   haveTitle = true
 }) => {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleClick = () => {
-    if (linkPath) return history.push(linkPath)
-    return history.goBack()
+    if (linkPath) return navigate(linkPath)
+    return navigate(-1)
   }
 
   const GoButton = () => (

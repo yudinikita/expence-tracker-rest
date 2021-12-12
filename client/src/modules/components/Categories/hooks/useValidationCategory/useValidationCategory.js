@@ -1,13 +1,18 @@
-import { useQuery } from '@apollo/client'
-import { GET_CATEGORIES } from '../../../../graphql/query/category.query'
 import { checkUnique, checkValidLength } from './utils/validations'
+import { useGetCategories } from '../../../../hooks'
 
 export const useValidationCategory = (verifiableTitle) => {
-  const getCategories = useQuery(GET_CATEGORIES)
-  const categories = getCategories?.data?.getCategories
+  const { categories } = useGetCategories()
 
   const isUnique = checkUnique(categories, verifiableTitle)
   const isValidLength = checkValidLength(verifiableTitle)
+
+  if (verifiableTitle.length === 0) {
+    return {
+      isValid: false,
+      messageFailed: 'Укажите название категории'
+    }
+  }
 
   if (!isUnique) {
     return {

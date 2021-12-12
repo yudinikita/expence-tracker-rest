@@ -2,15 +2,28 @@ const TransactionModel = require('../models/Transactions')
 
 class TransactionService {
 
-  async getTransactions (user) {
-    const transactionsFetched = await TransactionModel.find({ user }).sort({ createdAt: 1 }).populate('category')
+  async getTransactions (user, startDate, endDate) {
+    const transactionsFetched
+      = await TransactionModel
+      .find({
+        user,
+        createdAt: {
+          $gte: startDate,
+          $lte: endDate
+        }
+      })
+      .sort({ createdAt: -1 })
+      .populate('category')
 
     return await transactionsFetched.map(transaction => {
+      const createdAt = new Date(transaction._doc.createdAt).toISOString()
+      const updatedAt = new Date(transaction._doc.updatedAt).toISOString()
+
       return {
         ...transaction._doc,
         _id: transaction.id,
-        createdAt: new Date(transaction._doc.createdAt).toISOString(),
-        updatedAt: new Date(transaction._doc.updatedAt).toISOString(),
+        createdAt,
+        updatedAt,
       }
     })
   }
@@ -18,25 +31,86 @@ class TransactionService {
   async getTransactionDetail (user, _id) {
     const transactionFetched = await TransactionModel.findOne({ user, _id }).populate('category')
 
+    const createdAt = new Date(transactionFetched._doc.createdAt).toISOString()
+    const updatedAt = new Date(transactionFetched._doc.updatedAt).toISOString()
+
     return {
       ...transactionFetched._doc,
       _id: transactionFetched.id,
-      createdAt: new Date(transactionFetched._doc.createdAt).toISOString(),
-      updatedAt: new Date(transactionFetched._doc.updatedAt).toISOString(),
+      createdAt,
+      updatedAt,
     }
+  }
+
+  async getSearchTransaction (user, query) {
+    if (!query) return null
+
+    const patternFind = /[^A-Za-zА-Яа-яЁё0-9]+/g
+    const querySearch = query.replace(patternFind, '')
+
+    if (!querySearch) return null
+
+    const amount = parseInt(querySearch) || null
+    const commentary = String(querySearch) || null
+
+    const transactionsFetched
+      = await TransactionModel
+      .find({
+        user,
+        $or: [
+          { amount: amount },
+          { commentary: { $regex: commentary } }
+        ]
+      })
+      .sort({ createdAt: -1 })
+      .populate('category')
+
+    return await transactionsFetched.map(transaction => {
+      const createdAt = new Date(transaction._doc.createdAt).toISOString()
+      const updatedAt = new Date(transaction._doc.updatedAt).toISOString()
+
+      return {
+        ...transaction._doc,
+        _id: transaction.id,
+        createdAt,
+        updatedAt,
+      }
+    })
   }
 
   async createTransaction (user, transaction) {
     const newTransaction = new TransactionModel({ user, ...transaction })
-
     await newTransaction.save()
+    const populateTransaction = await newTransaction.populate('category')
 
-    return newTransaction.populate('category')
+    const createdAt = new Date(populateTransaction._doc.createdAt).toISOString()
+    const updatedAt = new Date(populateTransaction._doc.updatedAt).toISOString()
+
+    return {
+      ...populateTransaction._doc,
+      _id: populateTransaction.id,
+      createdAt,
+      updatedAt,
+    }
   }
 
   async deleteTransaction (_id) {
-    const result = await TransactionModel.deleteOne({ _id })
-    return result.deletedCount === 1
+    const deletedTransaction = await TransactionModel.deleteOne({ _id })
+
+    const isDeleted = deletedTransaction.deletedCount === 1
+    if (isDeleted) {
+      return {
+        code: 200,
+        success: true,
+        message: 'Операция удалена'
+      }
+    } else {
+      return {
+        code: 200,
+        success: false,
+        message: 'Операция не удалена'
+      }
+    }
   }
 
   async deleteManyTransaction (category) {

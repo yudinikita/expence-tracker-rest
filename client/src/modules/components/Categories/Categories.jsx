@@ -1,19 +1,18 @@
 import React from 'react'
+import { CategoriesForm, CategoriesList, CategoriesLoader } from './components'
 import { MyError } from '../MyError'
-import { MyLoader } from '../UI'
-import { CategoriesForm, CategoriesList } from './components'
-import { useCategories } from './hooks'
+import { useGetCategories } from '../../hooks'
 
 export const Categories = () => {
-  const { loading, error, data } = useCategories()
+  const { categories, loading, error } = useGetCategories()
 
-  if (loading) return <MyLoader />
+  if (loading) return <CategoriesLoader />
   if (error) return <MyError error={error} />
 
   return (
     <div>
       <CategoriesForm />
-      <CategoriesList categories={data?.getCategories} />
+      <CategoriesList categories={categories} />
     </div>
   )
 }

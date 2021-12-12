@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useQuery } from '@apollo/client'
-import { GET_ANALYTICS } from '../../../../graphql/query/analytics.query'
+import { useGetAnalyticsBalance } from '../../../../hooks'
 
 export const useAnalyticsBalance = (startDate, endDate) => {
   const defaultAnalytics = { amount: 0, percent: 0 }
@@ -8,42 +7,38 @@ export const useAnalyticsBalance = (startDate, endDate) => {
   const [expense, setExpense] = useState(defaultAnalytics)
   const [remainder, setRemainder] = useState(defaultAnalytics)
 
-  const { loading, error, data } = useQuery(GET_ANALYTICS, {
-    variables: { startDate, endDate }
-  })
+  const { analyticsBalance, loading, error } = useGetAnalyticsBalance(startDate, endDate)
 
   useEffect(() => {
     if (!loading && !error) {
-      const response = data.getAnalyticsBalance
+      const totalTransaction = Math.abs(analyticsBalance.income) + Math.abs(analyticsBalance.expense) || 0
 
-      const totalTransaction = Math.abs(response.income) + Math.abs(response.expense) || 0
-
-      const incomePercentage = Math.abs(response.income / totalTransaction) * 100 || 0
-      const expensePercentage = Math.abs(response.expense / totalTransaction * 100) || 0
-      const remainderPercentage = Math.abs(response.remainder / totalTransaction * 100) || 0
+      const incomePercentage = Math.abs(analyticsBalance.income / totalTransaction) * 100 || 0
+      const expensePercentage = Math.abs(analyticsBalance.expense / totalTransaction * 100) || 0
+      const remainderPercentage = Math.abs(analyticsBalance.remainder / totalTransaction * 100) || 0
 
       setIncome({
-        amount: response.income,
+        amount: analyticsBalance.income,
         percent: incomePercentage
       })
 
       setExpense({
-        amount: Math.abs(response.expense),
+        amount: Math.abs(analyticsBalance.expense),
         percent: expensePercentage
       })
 
       setRemainder({
-        amount: response.remainder,
+        amount: analyticsBalance.remainder,
         percent: remainderPercentage
       })
     }
-  }, [data, loading, error])
+  }, [analyticsBalance, loading, error])
 
-  const AnalyticsItems = [
-    { id: 0, title: 'Доход', amount: income.amount, percent: income.percent, color: '#009E0D' },
-    { id: 1, title: 'Расход', amount: expense.amount, percent: expense.percent, color: '#FF3D00' },
-    { id: 2, title: 'Остаток', amount: remainder.amount, percent: remainder.percent, color: '#FFCF26' }
+  const analyticsItems = [
+    { id: 0, title: 'Доход', amount: income.amount, percent: income.percent, color: '#009e0d' },
+    { id: 1, title: 'Расход', amount: expense.amount, percent: expense.percent, color: '#ff3d00' },
+    { id: 2, title: 'Остаток', amount: remainder.amount, percent: remainder.percent, color: '#ffcf26' }
   ]
 
-  return { AnalyticsItems, loading, error }
+  return { analyticsItems, loading, error }
 }

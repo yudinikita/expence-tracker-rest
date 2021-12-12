@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useSignOut } from 'react-auth-kit'
+import { useNavigate } from 'react-router-dom'
 import { MyModal } from '../..'
-import { MyButton } from '../../UI'
 
 export const ModalSignOut = ({
   isOpen,
   onRequestClose
 }) => {
-  const signOut = useSignOut()
+  const navigate = useNavigate()
+  const handleClickLogout = () => navigate('/logout')
 
   return (
     <MyModal
@@ -18,9 +18,21 @@ export const ModalSignOut = ({
       <div>
         <h2>Выход из аккаунта</h2>
         <p>Вы уверены, что хотите выйти из аккаунта?</p>
-        <MyButton type='button' text='Выйти' onClick={signOut} />
+        <button
+          type='button'
+          onClick={handleClickLogout}
+          className='mainButton'
+        >
+          Выйти
+        </button>
         <br /><br />
-        <MyButton type='button' myType='second' text='Отмена' onClick={onRequestClose} />
+        <button
+          type='button'
+          onClick={onRequestClose}
+          className='secondaryButton'
+        >
+          Отмена
+        </button>
       </div>
     </MyModal>
   )

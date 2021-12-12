@@ -14,9 +14,19 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false
   },
-  activationLink: {
+  activationCode: {
     type: String
+  },
+  settings: {
+    language: {
+      type: String,
+      default: 'ru'
+    },
+    currency: {
+      type: String,
+      default: 'RUB'
+    }
   }
-})
+}, { timestamps: true })
 
 module.exports = model('User', UserSchema)

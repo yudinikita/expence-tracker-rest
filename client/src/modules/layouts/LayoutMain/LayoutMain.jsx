@@ -1,22 +1,18 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import styles from './LayoutMain.module.scss'
 import { MainHeader, MainNavigation } from '../../components'
+import { Outlet } from 'react-router-dom'
+import styles from './LayoutMain.module.scss'
 
-export const LayoutMain = ({ children }) => {
+export const LayoutMain = () => {
   return (
     <div className={styles.container}>
       <MainHeader />
 
-      <div className='container'>
-        {children}
-      </div>
+      <main className='container'>
+        <Outlet />
+      </main>
 
       <MainNavigation />
     </div>
   )
-}
-
-LayoutMain.propTypes = {
-  children: PropTypes.node
 }

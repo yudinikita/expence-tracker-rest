@@ -1,1 +1,0 @@
-export { MyCalendar } from './MyCalendar'

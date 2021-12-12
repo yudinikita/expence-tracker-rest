@@ -4,7 +4,8 @@ export const useAnalyticsContainer = () => {
   const [typeAnalytic, setTypeAnalytic] = useState('')
 
   const handleCheckboxClick = (e) => {
-    setTypeAnalytic(e.target.value)
+    const value = e.target.value
+    setTypeAnalytic(value)
   }
 
   return { typeAnalytic, handleCheckboxClick }

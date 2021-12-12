@@ -1,30 +1,21 @@
 import React from 'react'
-import { MyCheckbox } from '../../UI'
-import { AnalyticsTypes } from '../../../data'
-import { MyCalendar } from '../..'
-import { useCalendar } from '../../../hooks'
-import { AnalyticsContainer } from './components/AnalyticsContainer'
+import { DateSwitcher } from '../..'
+import { useDateSwitcher } from '../../../hooks'
+import { AnalyticsContainer, Checkbox } from './components'
 import { useAnalyticsContainer } from './hooks/useAnalyticsContainer'
 import styles from './AnalyticsMain.module.scss'
 
 export const AnalyticsMain = () => {
-  const { startDate, endDate, changeHandler } = useCalendar()
+  const { date, onChange } = useDateSwitcher()
   const { typeAnalytic, handleCheckboxClick } = useAnalyticsContainer()
 
   return (
     <div>
-      <div className={styles.tabs}>
-        <MyCheckbox
-          className={styles.tabsGroup}
-          data={AnalyticsTypes}
-          registerLabel='typeAnalytics'
-          onChange={handleCheckboxClick}
-        />
-      </div>
+      <Checkbox handleCheckboxClick={handleCheckboxClick} />
 
-      <MyCalendar className={styles.calendar} changeHandler={changeHandler} />
+      <DateSwitcher className={styles.calendar} onChange={onChange} />
 
-      <AnalyticsContainer typeAnalytic={typeAnalytic} startDate={startDate} endDate={endDate} />
+      <AnalyticsContainer typeAnalytic={typeAnalytic} date={date} />
     </div>
   )
 }

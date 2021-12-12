@@ -1,2 +1,3 @@
 export { CategoriesList } from './CategoriesList'
-export { CategoriesForm } from './CategoriesForm/CategoriesForm'
+export { CategoriesForm } from './CategoriesForm'
+export { CategoriesLoader } from './CategoriesLoader'

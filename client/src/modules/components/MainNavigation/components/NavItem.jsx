@@ -6,13 +6,14 @@ import styles from './NavItem.module.scss'
 
 const pathIcon = '/images/icons/nav'
 
+const className = ({ isActive }) => styles.link + (isActive ? ` ${styles.activeLink}` : '')
+
 export const NavItem = ({ link }) => (
   <NavLink
     to={`/${link.to}`}
     title={link.title}
-    className={styles.link}
-    activeClassName={styles.activeLink}
-    exact
+    className={className}
+    end
   >
     <InlineSVG
       className={styles.icon}

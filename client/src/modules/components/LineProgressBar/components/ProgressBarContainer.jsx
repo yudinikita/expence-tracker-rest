@@ -8,7 +8,12 @@ export const ProgressBarContainer = ({ containerRef, height, children }) => (
     className={styles.container}
     style={{ height }}
   >
-    {children}
+    <div
+      className={styles.inner}
+      style={{ height }}
+    >
+      {children}
+    </div>
   </div>
 )
 

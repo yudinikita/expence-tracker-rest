@@ -13,5 +13,6 @@ export const HomePhrase = ({ style }) => {
 }
 
 HomePhrase.propTypes = {
-  style: PropTypes.object
+  style: PropTypes.object,
+  phrase: PropTypes.string,
 }

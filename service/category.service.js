@@ -1,5 +1,16 @@
 const CategoryModel = require('../models/Category')
 const transactionService = require('./transaction.service')
+const { Types } = require('mongoose')
+
+const defaultCategories = [
+  'Зарплата',
+  'Проезд',
+  'Продукты',
+  'Покупки',
+  'Подарки',
+  'Развлечения',
+  'Здоровье',
+]
 
 class CategoryService {
 
@@ -13,6 +24,12 @@ class CategoryService {
     await newCategory.save()
 
     return newCategory
+  }
+
+  async createDefaultCategories (userId) {
+    const user = Types.ObjectId(userId)
+    const defaultCategoriesWithUser = defaultCategories.map(category => {return { user, title: category }})
+    return await CategoryModel.insertMany(defaultCategoriesWithUser)
   }
 
   async deleteCategory (id) {

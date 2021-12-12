@@ -19,7 +19,7 @@ export const CategoriesList = ({ categories }) => {
     <div className={styles.container}>
       <ul className='list-reset'>
         {categories.map(category => (
-          <li key={category._id} className={styles.listItem}>
+          <li key={category.id} className={styles.listItem}>
             <CategoriesListItem
               category={category}
               openModalDelete={openModal}

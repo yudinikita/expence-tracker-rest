@@ -4,23 +4,25 @@ import { AnalyticsBalance, AnalyticsExpense, AnalyticsIncome } from '../../..'
 
 export const AnalyticsContainer = ({
   typeAnalytic,
-  startDate,
-  endDate
+  date
 }) => {
   switch (typeAnalytic) {
     case 'balance':
-      return (<AnalyticsBalance startDate={startDate} endDate={endDate} />)
+      return (<AnalyticsBalance date={date} />)
     case 'expense':
-      return (<AnalyticsExpense startDate={startDate} endDate={endDate} />)
+      return (<AnalyticsExpense date={date} />)
     case 'income':
-      return (<AnalyticsIncome startDate={startDate} endDate={endDate} />)
+      return (<AnalyticsIncome date={date} />)
     default:
-      return (<AnalyticsBalance startDate={startDate} endDate={endDate} />)
+      return (<AnalyticsBalance date={date} />)
   }
 }
 
 AnalyticsContainer.propTypes = {
   typeAnalytic: PropTypes.string,
-  startDate: PropTypes.object,
-  endDate: PropTypes.object
+  date: PropTypes.exact({
+    activeDate: PropTypes.instanceOf(Date),
+    startDate: PropTypes.instanceOf(Date),
+    endDate: PropTypes.instanceOf(Date)
+  }),
 }

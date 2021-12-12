@@ -7,9 +7,9 @@ import styles from './SettingsNavigateItem.module.scss'
 export const SettingsNavigateItem = ({ link }) => {
   return (
     <NavLink
-      to={`/${link.to}`}
+      to={`${link.to}`}
       className={styles.link}
-      exact
+      end
     >
       <div className={styles.titleContainer}>
         <InlineSVG

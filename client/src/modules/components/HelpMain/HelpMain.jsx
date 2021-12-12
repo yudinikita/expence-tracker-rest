@@ -1,11 +1,12 @@
 import React from 'react'
-import { InnerNavigate } from '..'
+import { HelpForm, HelpList } from './components'
 
 export const HelpMain = () => {
   return (
     <div>
-      <InnerNavigate title='Помощь' />
-      <p>Компонент помощи</p>
+      <HelpForm />
+      <br /><br />
+      <HelpList />
     </div>
   )
 }

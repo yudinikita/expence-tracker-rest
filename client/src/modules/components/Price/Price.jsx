@@ -1,60 +1,61 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useSettings } from '../../hooks'
-import styles from './Price.module.scss'
+import { SIGN_DISPLAY } from './constants'
+import { usePrice } from './hooks'
+import './Price.scss'
 
-const styleAmount = (amount) => {
-  if (amount > 0) return styles.plus
-  if (amount < 0) return styles.minus
+const propTypes = {
+  amount: PropTypes.number,
+  haveColor: PropTypes.bool,
+  havePrefix: PropTypes.bool,
+  signDisplay: PropTypes.oneOf([
+    SIGN_DISPLAY.AUTO,
+    SIGN_DISPLAY.NEVER,
+    SIGN_DISPLAY.ALWAYS,
+    SIGN_DISPLAY.EXCEPT_ZERO
+  ]),
+  className: PropTypes.string,
+  style: PropTypes.object,
+  title: PropTypes.string,
 }
 
-const Currency = ({ currency }) => <span>{currency || '₽'}</span>
+const defaultProps = {
+  haveColor: false,
+  havePrefix: false,
+  signDisplay: SIGN_DISPLAY.AUTO,
+  title: ''
+}
 
 export const Price = ({
   amount,
   haveColor,
-  haveSign,
+  havePrefix,
+  signDisplay,
   className,
-  signType,
-  style
+  style,
+  title
 }) => {
-  const { settings } = useSettings()
+  const {
+    formatAmount,
+    defaultStyles,
+    prefix
+  } = usePrice(amount, signDisplay, haveColor)
 
-  const Sign = ({ haveSign, amount, signType }) => {
-    if (!haveSign) return null
-    switch (signType) {
-      case 'arrow':
-        if (amount > 0) return '🠕 '
-        if (amount < 0) return '🠗 '
-        return ''
-      default:
-        return amount > 0 ? '+' : ''
-    }
-  }
+  const activeClassName = 'price ' + className
+
+  const renderPrefix = () => (havePrefix ? <span>{prefix}</span> : null)
 
   return (
     <span
-      className={`${haveColor && styleAmount(amount)} ${styles.amount} ${className}`}
-      style={{ ...style }}
+      className={activeClassName}
+      style={{ ...defaultStyles, ...style }}
+      title={title}
     >
-      <Sign
-        amount={amount}
-        haveSign={haveSign}
-        signType={signType}
-      />{amount} <Currency currency={settings.currency} />
+      {renderPrefix()} <span>{formatAmount}</span>
     </span>
   )
 }
 
-Currency.propTypes = {
-  currency: PropTypes.string
-}
+Price.propTypes = propTypes
 
-Price.propTypes = {
-  amount: PropTypes.number,
-  haveColor: PropTypes.bool,
-  haveSign: PropTypes.bool,
-  className: PropTypes.string,
-  signType: PropTypes.oneOf(['arrow']),
-  style: PropTypes.object
-}
+Price.defaultProps = defaultProps

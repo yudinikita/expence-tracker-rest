@@ -4,7 +4,6 @@ import styles from './CategoriesForm.module.scss'
 
 export const CategoriesForm = () => {
   const {
-    error,
     loading,
     inputCategory,
     onSubmitForm,
@@ -16,17 +15,28 @@ export const CategoriesForm = () => {
       onSubmit={onSubmitForm}
       className={styles.container}
     >
-      <input
-        className={styles.input}
-        onChange={onChangeInput}
-        value={inputCategory}
-        type='text'
-        disabled={loading}
-      />
-      {error && <p>Ошибка!</p>}
+      <div className={styles.input + ' groupInput'}>
+        <input
+          className='mainInput'
+          onChange={onChangeInput}
+          value={inputCategory}
+          type='text'
+          id='newCategory'
+          placeholder=' '
+          required
+          disabled={loading}
+        />
+        <label
+          htmlFor='newCategory'
+          className='mainInput__label'
+        >
+          Новая категория
+        </label>
+      </div>
       <button
         type='submit'
         disabled={loading}
+        className='mainButton'
       >
         Добавить
       </button>

@@ -22,6 +22,7 @@ export const ModalDelete = ({ isOpen }) => {
         <FormDeleteWithTransactions />
 
         <button
+          className='secondaryButton'
           type='button'
           onClick={onRequestClose}
         >

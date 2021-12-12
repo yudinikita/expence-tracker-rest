@@ -1,9 +1,10 @@
 import React from 'react'
-import { SettingsSecurityMain } from '../../../components'
+import { InnerNavigate, SettingsSecurityMain } from '../../../components'
 
 export const SettingsSecurityPage = () => {
   return (
     <>
+      <InnerNavigate title='Безопасность' />
       <SettingsSecurityMain />
     </>
   )

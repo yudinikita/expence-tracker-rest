@@ -1,34 +1,44 @@
 import { useContext } from 'react'
 import { ModalDeleteContext } from '../../../context'
 import { useMutation } from '@apollo/client'
-import { DELETE_CATEGORY } from '../../../../../../../graphql/mutations/category'
-import { GET_CATEGORIES } from '../../../../../../../graphql/query/category.query'
+import { DELETE_CATEGORY } from '../../../../../../../graphql/mutations'
+import { useAlert } from 'react-alert'
 
 export const useFormDeleteBase = () => {
+  const alert = useAlert()
   const { selectedCategory, onRequestClose } = useContext(ModalDeleteContext)
 
-  const [deleteCategory] = useMutation(
+  const [deleteCategory, { loading, error }] = useMutation(
     DELETE_CATEGORY,
     {
       refetchQueries: [
-        GET_CATEGORIES,
-        'getCategories'
+        'categories',
+        'transactions',
+        'analyticsBalance',
+        'analyticsExpense',
+        'analyticsIncome'
       ],
     })
+
+  if (error) alert.error('Не удалось удалить категорию')
 
   const clickDeleteBase = async () => {
     try {
       await deleteCategory({
         variables: {
-          id: selectedCategory._id
+          id: selectedCategory.id
         }
       })
-    } catch (e) {
-      console.log({ ...e })
+      alert.success('Категория удалена')
+    } catch {
+      alert.error('Не удалось удалить категорию')
     } finally {
       onRequestClose()
     }
   }
 
-  return { clickDeleteBase }
+  return {
+    clickDeleteBase,
+    loading
+  }
 }

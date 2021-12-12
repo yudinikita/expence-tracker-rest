@@ -1,11 +1,10 @@
 import React from 'react'
-import { InnerNavigate } from '../..'
+import { FormChangePassword } from './components/FormChangePassword'
 
 export const SettingsSecurityMain = () => {
   return (
     <>
-      <InnerNavigate title='Безопасность' />
-      <p>Компонент безопасности</p>
+      <FormChangePassword />
     </>
   )
 }

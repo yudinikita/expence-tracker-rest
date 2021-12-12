@@ -4,7 +4,7 @@ import { useAuthUser } from 'react-auth-kit'
 
 export const SettingsEmailMain = () => {
   const auth = useAuthUser()
-  const isAuthGoogle = true
+  const isAuthGoogle = false
 
   const CurrentEmail = () => (
     <div>

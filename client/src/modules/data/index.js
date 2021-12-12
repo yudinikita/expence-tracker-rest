@@ -2,6 +2,7 @@
 
 export { homePhrases } from './ListHomePhrases'
 export { currencies } from './ListCurrencies'
+export { languages } from './ListLanguages'
 export { mainLinks } from './ListMainLinks'
 export { settingsLinks } from './ListSettingsLinks'
-export { AnalyticsTypes } from './AnalyticsTypes'
+export { months } from './Months'

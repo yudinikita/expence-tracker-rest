@@ -1,14 +1,13 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { InnerNavigate } from '../../components/index'
 import { Content404Page } from './Content404Page'
-import { MyButton } from '../../components/UI'
 
 export const Page404 = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
 
-  const goHome = () => history.push('/')
-  const goHelp = () => history.push('/help')
+  const goHome = () => navigate('/')
+  const goHelp = () => navigate('/help')
 
   return (
     <>
@@ -18,9 +17,21 @@ export const Page404 = () => {
 
       <p>Такой страницы больше нет или она никогда не&#160;существовала.</p>
 
-      <MyButton onClick={goHome} type='button' text='На главную' />
+      <button
+        className='mainButton'
+        type='button'
+        onClick={goHome}
+      >
+        На главную
+      </button>
       <br /><br />
-      <MyButton onClick={goHelp} type='button' myType='second' text='Помощь' />
+      <button
+        className='secondaryButton'
+        type='button'
+        onClick={goHelp}
+      >
+        Помощь
+      </button>
     </>
   )
 }
